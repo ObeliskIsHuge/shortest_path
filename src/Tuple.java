@@ -9,7 +9,6 @@ public class Tuple {
     // Weight of the edge
     private String weight;
 
-
     /****
      * Creates a new Tuple Object
      * @param name name of the Node

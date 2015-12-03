@@ -22,10 +22,11 @@ public class AdjacencyList {
 
     /****
      * Adds a list of nodes to the AdjacencyList
+     * @param index index that the list will be added
      * @param nodeList list of nodes that will be appended to list
      */
-    public void addNodeList(LinkedList<Tuple> nodeList){
-        list.add(nodeList);
+    public void addNodeList(int index , LinkedList<Tuple> nodeList){
+        list.add(index , nodeList);
     }
 
     /***
