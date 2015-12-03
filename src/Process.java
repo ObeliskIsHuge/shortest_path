@@ -64,7 +64,7 @@ public class Process {
             for(String weight : pieces){
 
                 if(!weight.equals("0") && !weight.equals("")){
-                    nodeTuple = new Tuple(String.valueOf(nodeIndex),  weight);
+                    nodeTuple = new Tuple(nodeIndex,  Integer.parseInt(weight));
                     tupleList.add(nodeTuple);
                 }
                 nodeIndex++;
