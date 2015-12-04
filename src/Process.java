@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -93,6 +94,7 @@ public class Process {
 
         Node[] fringeList = new Node[numOfNodes];
         LinkedList<Edge> adjNodes = adjList.getNode(startIndex);
+//        int visitedNodes = 1;
         Node currentNode;
 
         // Populates the fringeList of all adj nodes
@@ -102,6 +104,90 @@ public class Process {
             fringeList[currentNode.getName()] = currentNode;
         }
 
-//        System.out.println("Hello");
+//        int closestNode = 1000000;
+        currentNode = null;
+//        Node newNode;
+//        int baseWeight;
+//        ArrayList<Integer> previousPath;
+        // Processes all nodes that are reachable
+        while(areNodesLeft(fringeList)){
+
+            // Goes through the entire list looking for the closest node
+            for(Node tempNode : fringeList){
+
+                // Will be true the current node is null and temp isn't
+                if(currentNode == null && tempNode != null && !tempNode.isNodeVisited()){
+                    currentNode = tempNode;
+                } else if(tempNode != null && !tempNode.isNodeVisited()){
+
+                    if(currentNode.getTotalWeight() == tempNode.getTotalWeight()){
+                        if(tempNode.getName() < currentNode.getName()){
+                            currentNode = tempNode;
+                        }
+                    } else if(tempNode.getTotalWeight() < currentNode.getTotalWeight()){
+                        currentNode = tempNode;
+                    }
+                }
+            }
+
+            //Gets all adjacentNodes
+            adjNodes = adjList.getNode(currentNode.getName());
+//            baseWeight = currentNode.getTotalWeight();
+//            previousPath = currentNode.getPath();
+
+            // Adds the adjEdges to the fringeList and updates nodes
+            for(Edge adjEdge : adjNodes){
+
+                Node newNode = new Node(adjEdge.getName(), currentNode.getTotalWeight() + adjEdge.getWeight(), currentNode.getPath());
+
+                // Checks to see if this new node exists and hasn't been visited before
+                if(fringeList[newNode.getName()] != null && !fringeList[newNode.getName()].isNodeVisited()){
+
+                    Node oldNode = fringeList[newNode.getName()];
+                    // Checks to see if the new node has a lower weight than the old node
+                    if(newNode.getTotalWeight() < oldNode.getTotalWeight()){
+                        fringeList[newNode.getName()] = newNode;
+                    }
+
+                } else if(fringeList[newNode.getName()] == null){
+                    fringeList[newNode.getName()] = newNode;
+                }
+            }
+
+            // mark node as visited
+            currentNode.visitNode();
+            fringeList[currentNode.getName()] = currentNode;
+            currentNode = null;
+        }
+
+        printFringeList(fringeList);
+
+    }
+
+    /***
+     *
+     * Determines if nodes can be visited
+     * @param fringeList list of nodes
+     * @return true if there are nodes left to process
+     *         false otherwise
+     */
+    private boolean areNodesLeft(Node[] fringeList){
+
+        // Iterates over the entire fringe list
+        for(Node tempNode : fringeList){
+            //Will be true a node can still be reached
+            if(tempNode != null && !tempNode.isNodeVisited()){
+                return  true;
+            }
+        }
+        return false;
+    }
+
+    /***
+     * Prints the fringeList
+     * @param fringeList list that will be printed
+     */
+    private void printFringeList(Node[] fringeList){
+
     }
 }

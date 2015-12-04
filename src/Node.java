@@ -29,7 +29,16 @@ public class Node {
     public Node(int name, int totalWeight, ArrayList<Integer> path) {
         this.totalWeight = totalWeight;
         this.name = name;
-        this.path = path;
+
+        // Will be true for the starting index
+        if(path == null){
+            this.path = new ArrayList<>();
+        } else {
+//            this.path = (ArrayList<Integer>)path.clone();
+            this.path = new ArrayList<>(path);
+        }
+        this.path.add(this.name);
+
         this.visited = false;
     }
 
@@ -50,14 +59,30 @@ public class Node {
         return name;
     }
 
+
+    /***
+     * Gets the path of a node
+     * @return path of the node
+     */
+    public ArrayList<Integer> getPath() {
+        return path;
+    }
+
     /***
      * Returns the path plus the current node
      * @return string that contains the data
      */
     @Override
     public String toString(){
-        //TODO
-        return null;
+        String returnString = "";
+        StringBuilder stringBuilder = new StringBuilder(returnString);
+
+        // prints entire path
+        for(int location : path){
+            stringBuilder.append(location + "  ");
+        }
+
+        return stringBuilder.toString();
     }
 
 
@@ -81,7 +106,7 @@ public class Node {
      * @return true if the node was visited
      *         false otherwise
      */
-    public boolean nodeVisited(){
+    public boolean isNodeVisited(){
         return this.visited;
     }
 }
