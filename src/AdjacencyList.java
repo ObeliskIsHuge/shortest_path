@@ -40,8 +40,8 @@ public class AdjacencyList {
     }
 
     /***
-     * Returns the contents of the
-     * @return
+     * Prints the contents of the Adjacency list
+     * @return string that contains the data
      */
     @Override
     public String toString(){

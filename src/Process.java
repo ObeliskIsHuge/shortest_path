@@ -1,7 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -80,6 +79,7 @@ public class Process {
             listIndex++;
         }
 
+        outputFile.printLine(adjList.toString());
         dijkstrasAlgorithm(startingIndex , numOfNodes);
 
     }
@@ -94,7 +94,6 @@ public class Process {
 
         Node[] fringeList = new Node[numOfNodes];
         LinkedList<Edge> adjNodes = adjList.getNode(startIndex);
-//        int visitedNodes = 1;
         Node currentNode;
 
         // Populates the fringeList of all adj nodes
@@ -104,11 +103,7 @@ public class Process {
             fringeList[currentNode.getName()] = currentNode;
         }
 
-//        int closestNode = 1000000;
         currentNode = null;
-//        Node newNode;
-//        int baseWeight;
-//        ArrayList<Integer> previousPath;
         // Processes all nodes that are reachable
         while(areNodesLeft(fringeList)){
 
@@ -132,8 +127,6 @@ public class Process {
 
             //Gets all adjacentNodes
             adjNodes = adjList.getNode(currentNode.getName());
-//            baseWeight = currentNode.getTotalWeight();
-//            previousPath = currentNode.getPath();
 
             // Adds the adjEdges to the fringeList and updates nodes
             for(Edge adjEdge : adjNodes){

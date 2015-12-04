@@ -13,8 +13,8 @@ public class FileOutput {
 
     // Object that handles the output writing of the file
     private PrintWriter writer;
-    // Keeps track of how many commands have been printed
-    private int commandCount;
+//    // Keeps track of how many commands have been printed
+//    private int commandCount;
 
     /***
      * Class constructor
@@ -28,7 +28,7 @@ public class FileOutput {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        commandCount = 1;
+//        commandCount = 1;
     }
 
 

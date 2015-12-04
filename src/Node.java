@@ -34,7 +34,6 @@ public class Node {
         if(path == null){
             this.path = new ArrayList<>();
         } else {
-//            this.path = (ArrayList<Integer>)path.clone();
             this.path = new ArrayList<>(path);
         }
         this.path.add(this.name);
