@@ -38,9 +38,13 @@ public class Process {
 
 
         // Get rind of the unimportant line
-        inputFile.readLine();
         String currentLine = inputFile.readLine();
         String[] pieces = currentLine.split("\\s+");
+        int numOfNodes = Integer.parseInt(pieces[3]);
+
+
+        currentLine = inputFile.readLine();
+        pieces = currentLine.split("\\s+");
         int startingIndex = Integer.parseInt(pieces[2]);
         outputFile.printLine("Node  | Out-neighbors");
         outputFile.printLine("----------------------------------------------------------------------");
@@ -50,38 +54,54 @@ public class Process {
         currentLine = inputFile.readLine();
         int nodeIndex;
         int listIndex = 0;
-        Tuple nodeTuple;
-        LinkedList<Tuple> tupleList;
+        Edge nodeEdge;
+        LinkedList<Edge> edgeList;
 
         // Runs through the rest of the file and fills the adjacency adjList
         while(currentLine != null){
 
             nodeIndex = -1;
-            tupleList = new LinkedList<>();
+            edgeList = new LinkedList<>();
             pieces = currentLine.split("\\s+");
 
             // Iterates over all the weights
             for(String weight : pieces){
 
                 if(!weight.equals("0") && !weight.equals("")){
-                    nodeTuple = new Tuple(nodeIndex,  Integer.parseInt(weight));
-                    tupleList.add(nodeTuple);
+                    nodeEdge = new Edge(nodeIndex,  Integer.parseInt(weight));
+                    edgeList.add(nodeEdge);
                 }
                 nodeIndex++;
             }
 
-            adjList.addNodeList(listIndex, tupleList);
+            adjList.addNodeList(listIndex, edgeList);
             currentLine = inputFile.readLine();
             listIndex++;
         }
 
-        dijkstrasAlgorithm(startingIndex);
+        dijkstrasAlgorithm(startingIndex , numOfNodes);
 
     }
 
 
+    /***
+     * Performs Dijkstras algorithm
+     * @param startIndex start node
+     * @param numOfNodes number of nodes that was given
+     */
+    private void dijkstrasAlgorithm(int startIndex, int numOfNodes){
 
-    private void dijkstrasAlgorithm(int startIndex){
-        //TODO
+        Node[] fringeList = new Node[numOfNodes];
+        LinkedList<Edge> adjNodes = adjList.getNode(startIndex);
+        Node currentNode;
+
+        // Populates the fringeList of all adj nodes
+        for(Edge currentEdge : adjNodes){
+
+            currentNode = new Node(currentEdge.getName() , currentEdge.getWeight() , null);
+            fringeList[currentNode.getName()] = currentNode;
+        }
+
+//        System.out.println("Hello");
     }
 }

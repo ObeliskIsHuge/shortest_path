@@ -10,7 +10,7 @@ import java.util.LinkedList;
 public class AdjacencyList {
 
     // List that will hold the records
-    private ArrayList<LinkedList<Tuple>> list;
+    private ArrayList<LinkedList<Edge>> list;
 
     /***
      * Creates a new AdjacencyList object
@@ -20,12 +20,22 @@ public class AdjacencyList {
     }
 
 
+    /***
+     * Retrieves a node from a location
+     * @param index index of the node
+     * @return node at index
+     */
+    public LinkedList<Edge> getNode(int index){
+        return list.get(index);
+    }
+
+
     /****
      * Adds a list of nodes to the AdjacencyList
      * @param index index that the list will be added
      * @param nodeList list of nodes that will be appended to list
      */
-    public void addNodeList(int index , LinkedList<Tuple> nodeList){
+    public void addNodeList(int index , LinkedList<Edge> nodeList){
         list.add(index , nodeList);
     }
 
@@ -41,13 +51,13 @@ public class AdjacencyList {
         int index = 0;
 
         // iterates over the list
-        for(LinkedList<Tuple> nodeList : list){
+        for(LinkedList<Edge> nodeList : list){
             stringBuilder.append("\t\t" + index);
             // Will be true only when the node has values
             if(nodeList != null){
                 // Prints all the tuples in the current list
-                for(Tuple tempTuple : nodeList){
-                    stringBuilder.append("\t\t" + tempTuple.toString());
+                for(Edge tempEdge : nodeList){
+                    stringBuilder.append("\t\t" + tempEdge.toString());
                 }
             }
             stringBuilder.append("\n");

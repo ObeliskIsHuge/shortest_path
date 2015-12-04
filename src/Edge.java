@@ -2,7 +2,7 @@
  * @author Brandon Potts
  * @version November 30, 2015
  */
-public class Tuple {
+public class Edge {
 
     // Name of the Node
     private int name;
@@ -10,15 +10,30 @@ public class Tuple {
     private int weight;
 
     /****
-     * Creates a new Tuple Object
+     * Creates a new Edge Object
      * @param name name of the Node
      * @param weight weight of the edge
      */
-    public Tuple(int name, int weight){
+    public Edge(int name, int weight){
         this.name = name;
         this.weight = weight;
     }
 
+    /***
+     * Gets the name of the edge
+     * @return name of the edge
+     */
+    public int getName() {
+        return name;
+    }
+
+    /**
+     * Gets the weight of an edge
+     * @return weight of an edge
+     */
+    public int getWeight() {
+        return weight;
+    }
 
     /****
      * Prints the tuple in a properly formatted string
