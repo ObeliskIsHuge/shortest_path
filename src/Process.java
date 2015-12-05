@@ -81,6 +81,7 @@ public class Process {
 
         outputFile.printLine(adjList.toString());
         dijkstrasAlgorithm(startingIndex , numOfNodes);
+        outputFile.closeFile();
 
     }
 
