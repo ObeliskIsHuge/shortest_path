@@ -53,6 +53,12 @@ public class FileOutput {
     }
 
     /***
+     * Prints a line without the extra new line
+     * @param line that will be printed
+     */
+    public void print(String line){ writer.print(line);}
+
+    /***
      * Prints a new line
      */
     public void printNewLine(){

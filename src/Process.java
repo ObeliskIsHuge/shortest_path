@@ -24,7 +24,7 @@ public class Process {
     public Process(){
         this.adjList = new AdjacencyList();
         try {
-            this.inputFile = new RandomAccessFile("1.Graph.txt", "r");
+            this.inputFile = new RandomAccessFile("3.Graph.txt", "r");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -80,6 +80,12 @@ public class Process {
         }
 
         outputFile.printLine(adjList.toString());
+        outputFile.printNewLine();
+        outputFile.printLine("Start vertex is: " + startingIndex);
+        outputFile.printNewLine();
+        outputFile.printLine("     Total");
+        outputFile.printLine("Dest | Weight | Path");
+        outputFile.printLine("----------------------------------------------------------------------");
         dijkstrasAlgorithm(startingIndex , numOfNodes);
         outputFile.closeFile();
 
@@ -154,7 +160,7 @@ public class Process {
             currentNode = null;
         }
 
-        printFringeList(fringeList);
+        printFringeList(fringeList, startIndex);
 
     }
 
@@ -180,8 +186,33 @@ public class Process {
     /***
      * Prints the fringeList
      * @param fringeList list that will be printed
+     * @param startingIndex index that the list started
      */
-    private void printFringeList(Node[] fringeList){
+    private void printFringeList(Node[] fringeList, int startingIndex){
+        String finalString = "";
+        StringBuilder stringBuilder = new StringBuilder(finalString);
+        int count = 0;
 
+        // processes the entire fringe list
+        for(Node fringeNode : fringeList){
+            // handles all the non-null nodes
+            if(fringeNode != null){
+                stringBuilder.append("  " + fringeNode.getName());
+                // Will be true when the current node was the starting node
+                if(fringeNode.getName() == startingIndex){
+                    stringBuilder.append("      0\n");
+                } else {
+                    stringBuilder.append("     " + fringeNode.getTotalWeight());
+                    stringBuilder.append("     " + fringeNode.printPath() + "\n");
+                }
+                // executes when the node wasn't reachable
+            } else {
+                stringBuilder.append("  " + count);
+                stringBuilder.append("     inf\n");
+            }
+            count++;
+        }
+
+        outputFile.print(stringBuilder.toString());
     }
 }

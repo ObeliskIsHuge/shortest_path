@@ -61,6 +61,7 @@ public class AdjacencyList {
                 }
             }
             stringBuilder.append("\n");
+            index++;
         }
         return stringBuilder.toString();
     }

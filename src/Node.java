@@ -68,6 +68,19 @@ public class Node {
     }
 
     /***
+     * Prints the path in a nice properly formatted string
+     * @return string that contains the data
+     */
+    public String printPath(){
+
+        StringBuilder stringBuilder = new StringBuilder("");
+        // Gets every node from the path
+        for(int currentInt : path){
+            stringBuilder.append("  " + currentInt);
+        }
+        return stringBuilder.toString();
+    }
+    /***
      * Returns the path plus the current node
      * @return string that contains the data
      */
